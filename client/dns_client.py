@@ -7,10 +7,19 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM
 )
 
 client.connect((HOST, PORT))
-domain = input("Enter Domain: ")
-client.send(domain.encode())
-response = client.recv(1024).decode()
+print("\n==============================")
+print(" DNS Client")
+print("==============================")
 
-print(f"\nResolved IP: {response}")
+while True:
+    query = input(
+        "\nEnter domain or IP (type 'exit' to quit): "
+    )
+    client.send(query.encode())
 
+    if query.lower() == "exit":
+        break
+    response = client.recv(1024).decode()
+
+    print(response)
 client.close()
