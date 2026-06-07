@@ -1,6 +1,7 @@
 import socket
 import threading
 from datetime import datetime
+import os
 
 HOST = "0.0.0.0"
 PORT = 5050
@@ -9,7 +10,10 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
 server.listen()
 
+local_ip = socket.gethostbyname(socket.gethostname())
+
 print(f"[SERVER] Listening on {HOST}:{PORT}")
+print(f"[SERVER] Local IP: {local_ip}")
 
 def log_query(client_ip, query, response):
 
@@ -17,7 +21,9 @@ def log_query(client_ip, query, response):
         "%Y-%m-%d %H:%M:%S"
     )
 
-    with open("results.txt", "a") as file:
+    log_file = os.path.join(os.path.dirname(__file__), "results.txt")
+
+    with open(log_file, "a") as file:
 
         file.write(
             f"\n[{timestamp}]\n"
@@ -65,5 +71,6 @@ def handle_client(client_socket, client_address):
 while True:
     client_socket, client_address = server.accept()
     
-    thread = threading.Thread(target=handle_client, args=(client_socket, client_address))
+    thread = threading.Thread(target=handle_client, args=(client_socket, client_address), daemon=True)
     thread.start()
+    print(f"[ACTIVE CONNECTIONS] {threading.active_count() - 1}")
