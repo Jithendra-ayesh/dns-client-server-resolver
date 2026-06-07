@@ -4,6 +4,12 @@ A multi-threaded DNS resolution system developed using Python socket programming
 
 The application supports forward DNS lookups (Domain → IP), reverse DNS lookups (IP → Domain), concurrent client handling, query logging, and timestamp tracking.
 
+## Project Overview
+
+This project simulates a DNS resolution service using a client-server architecture. The server accepts requests from multiple clients concurrently and performs forward and reverse DNS lookups using Python's networking libraries.
+
+All queries are logged with timestamps and client IP addresses to provide basic monitoring and auditing capabilities.
+
 ## Features
 
 - Forward DNS Lookup (Domain → IP)
@@ -47,19 +53,19 @@ dns-client-server-resolver/
 
 ### Server Startup
 
-![Server Startup](docs/screenshots/Screenshot 2026-06-07 140038.png)
+![Server Startup](docs/screenshots/server-startup.png)
 
 ### Forward Lookup
 
-![Forward Lookup](docs/screenshots/Screenshot 2026-06-07 140128.png)
+![Forward Lookup](docs/screenshots/forward-lookup.png)
 
 ### Reverse Lookup
 
-![Reverse Lookup](docs/screenshots/Screenshot 2026-06-07 140058.png)
+![Reverse Lookup](docs/screenshots/reverse-lookup.png)
 
 ### Query Logs
 
-![Query Logs](docs/screenshots/Screenshot 2026-06-07 140317.png)
+![Query Logs](docs/screenshots/query-logs.png)
 
 ## How to Run
 
@@ -72,7 +78,7 @@ python server/dns_server.py
 ### Start Client
 
 ```bash
-python client/dnd_client.py
+python client/dns_client.py
 ```
 
 ## Example Usage
@@ -100,3 +106,11 @@ Through this project I gained hands-on experience with:
 - Network Communication
 - Logging and Monitoring
 - Error Handling
+
+## Future Improvements
+
+- Domain validation
+- Port scanning integration
+- GUI interface
+- Deployment on a cloud server
+- Advanced DNS record lookups (MX, NS, TXT)
